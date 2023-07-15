@@ -1,0 +1,47 @@
+
+<form [formGroup]="usuarioForm" class="grid"> 
+    <div class="col-12 field ">
+        <mat-form-field class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input
+             formControlName="nombre"
+             matInput 
+             type="text"
+             name="nombre">
+        </mat-form-field>
+    </div>
+    <div class="col-6 field ">
+        <mat-form-field class="w-full">
+            <mat-label>Apellido</mat-label>
+            <input
+            formControlName="apellido"
+             matInput
+              type="text" 
+              name="apellido">
+        </mat-form-field>
+    </div>
+    <div class="col-6 field ">
+        <mat-form-field class="w-full"> 
+            <mat-label>email</mat-label>
+            <input
+            formControlName="email"
+             matInput
+              type="email" 
+              name="email">
+        </mat-form-field>
+    </div>
+    <div class="col-12 field ">
+        <mat-form-field class="w-full"> 
+            <mat-label>comision</mat-label>
+            <input 
+            formControlName="comision"
+            matInput 
+            type="text" 
+            name="comision">
+        </mat-form-field>
+    </div>  
+</form>
+
+<pre>
+    {{usuarioForm.value | json}}
+</pre>
