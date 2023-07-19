@@ -56,7 +56,7 @@ this.usuario = [...this.usuario,{
   })
  };
 
- eliminarUsuario(usuario: usuario ): void{
+ onDeleteUsuario(usuario: usuario ): void{
   console.log(usuario)
   if (confirm('esta seguro de eliminar a ${usuario.nombre}?')) {
     this.usuario = this.usuario.filter((u) => u.id !== usuario.id)
