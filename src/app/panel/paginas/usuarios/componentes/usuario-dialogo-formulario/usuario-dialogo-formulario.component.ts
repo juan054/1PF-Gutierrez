@@ -12,7 +12,7 @@ import { usuario } from '../modelos/modelos';
 export class UsuarioDialogoFormularioComponent {
   nombreControl = new FormControl<string | null>(null, [Validators.minLength(2), Validators.required]);
   apellidoControl = new FormControl<string | null>(null, [Validators.minLength(2), Validators.required]);
-  emailControl = new FormControl<string | null>(null, [Validators.minLength(2), Validators.required]);
+  emailControl = new FormControl<string | null>(null, [Validators.email, Validators.required]);
   comisionControl = new FormControl<number | null>(null, [Validators.minLength(2), Validators.required]);
 
   usuarioForm = new FormGroup({
