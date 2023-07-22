@@ -7,11 +7,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    NombreCompletoPipe
+  ],
   imports: [
     CommonModule,
     
@@ -23,7 +26,8 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatTableModule 
+    MatTableModule,
+    NombreCompletoPipe 
        
   ]
 })

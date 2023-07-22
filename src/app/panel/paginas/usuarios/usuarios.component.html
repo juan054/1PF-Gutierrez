@@ -2,7 +2,11 @@
 
 <hr>
 
-<table mat-table   [dataSource]="usuario"   class="mat-elevation-z8" >
+<table mat-table   
+[dataSource]="usuario" 
+(deleteUsuario)="onDeleteUsuario($event)"
+(editarUsuario)="onEditUsuario($event)"
+class="mat-elevation-z8" >
 
    
     <ng-container matColumnDef="id">
@@ -11,30 +15,29 @@
     </ng-container>
   
    
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef> nombre </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    <ng-container matColumnDef="nombreCompleto">
+      <th mat-header-cell *matHeaderCellDef> Nombre completo </th>
+      <td mat-cell *matCellDef="let element"> {{element| nombreCompleto}} </td>
     </ng-container>
   
-    
-    <ng-container matColumnDef="apellido">
-      <th mat-header-cell *matHeaderCellDef> apellido </th>
-      <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-    </ng-container>
-  
-   
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> email </th>
+      <th mat-header-cell *matHeaderCellDef> Email </th>
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
     <ng-container matColumnDef="comision">
-        <th mat-header-cell *matHeaderCellDef> comision</th>
+        <th mat-header-cell *matHeaderCellDef> Comision</th>
         <td mat-cell *matCellDef="let element"> {{element.comision}} </td>
     </ng-container>
+
     <ng-container matColumnDef="editarEliminar">
         <th mat-header-cell *matHeaderCellDef> editar/eliminar</th>
         <td mat-cell *matCellDef="let element">
-            <button (click)="deleteUsuario.emit(element)" mat-icon-button > <mat-icon> delete </mat-icon></button>
+
+            <button  (click)="onEditUsuario(element)" mat-icon-button > <mat-icon> edit </mat-icon></button>
+
+            <button  (click)="onDeleteUsuario(element)" mat-icon-button > <mat-icon> delete </mat-icon></button>
+
+            
         </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

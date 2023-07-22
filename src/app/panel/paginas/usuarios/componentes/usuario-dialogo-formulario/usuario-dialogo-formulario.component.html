@@ -40,15 +40,14 @@
     </div>
   </form>
 </div>
-<div mat-dialog-actions>
-    <div class="example-button-container">
+<div mat-dialog-actions class="botones">
+    <div class="example-button-container m-l-2">
         <button mat-dialog-close mat-fab color="primary" aria-label="Example icon button with a delete icon">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
-      <div class="example-button-container">
-        <button (click)="onSubmit()" type="submit" mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
-          <mat-icon>bookmark</mat-icon>
-        </button>
+      <div class="example-button-container " >
+        <button (click)="onSubmit()" type="submit"  mat-button color="accent">Guardar</button>
+        
       </div>
 </div>

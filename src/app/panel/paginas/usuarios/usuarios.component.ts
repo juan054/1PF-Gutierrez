@@ -7,7 +7,7 @@ import { usuario } from './componentes/modelos/modelos';
 
 
 const ELEMENT_DATA: usuario [] = [
-  {id:1, nombre:'ejemplo', apellido:'ejemplo apellido',email:'ejmplo@ejemplo.com', comision:654321 }
+  {id:1, nombre:'juan', apellido:'gutierrez',email:'juang@ejemplo.com', comision:654321 }
 ];
 
 @Component({
@@ -16,6 +16,9 @@ const ELEMENT_DATA: usuario [] = [
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent {
+
+
+
 
   public usuario: usuario[] = ELEMENT_DATA;
 
@@ -33,7 +36,7 @@ export class UsuariosComponent {
   .subscribe({
     next: (v) => {
       if (v) {
-this.usuario = [...this.usuario,{
+  this.usuario = [...this.usuario,{
  
     id: this.usuario.length + 1,
     nombre: v.nombre,
@@ -42,7 +45,7 @@ this.usuario = [...this.usuario,{
     comision:v.comision 
   
 
-}]
+  }]
 
        
 
@@ -55,18 +58,52 @@ this.usuario = [...this.usuario,{
     }
   })
  };
-
- onDeleteUsuario(usuario: usuario ): void{
-  console.log(usuario)
-  if (confirm('esta seguro de eliminar a ${usuario.nombre}?')) {
-    this.usuario = this.usuario.filter((u) => u.id !== usuario.id)
+ 
+ onDeleteUsuario(usuarioDelete: any): void{
+  if (confirm('¿esta seguro de eliminar a ${usuarioDelete.nombreCompleto}?' )) {
+    this.usuario = this.usuario.filter((usuario) => usuario.id !== usuarioDelete.id )
   }
- };
+  
+ 
+}
+ ;
 
 
- displayedColumns: string[] = ['id', 'nombre', 'apellido', 'email', 'comision','editarEliminar'];
+
+
+ onEditUsuario(usuarioEditar: any): void{
+  this.matdialog
+  .open(UsuarioDialogoFormularioComponent, {
+    data: usuarioEditar
+  })
+  .afterClosed()
+  .subscribe({
+    next: (data) => {
+     console.log(data);
+     if (data){
+      this.usuario = this.usuario.map((usuario) => {
+
+        return usuario.id === usuarioEditar.id 
+        ? {...usuario, ...data}
+        : usuario
+      })
+     }
+      
+     
+
+
+
+    }
+  })
+ }
+ 
+
+
+ displayedColumns: string[] = ['id','nombreCompleto', 'email', 'comision','editarEliminar'];
  dataSource: usuario[] = [];
 
  deleteUsuario = new EventEmitter<usuario>();
+
+ editarUsuario = new EventEmitter<usuario>();
 
 }

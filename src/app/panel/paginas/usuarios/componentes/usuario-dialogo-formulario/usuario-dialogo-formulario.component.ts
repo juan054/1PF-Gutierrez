@@ -1,7 +1,8 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { usuario } from '../modelos/modelos';
 
 @Component({
   selector: 'app-usuario-dialogo-formulario',
@@ -9,10 +10,10 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./usuario-dialogo-formulario.component.css']
 })
 export class UsuarioDialogoFormularioComponent {
-  nombreControl = new FormControl(null, [Validators.minLength(2), Validators.required]);
-  apellidoControl = new FormControl(null, [Validators.minLength(2), Validators.required]);
-  emailControl = new FormControl(null, [Validators.minLength(2), Validators.required]);
-  comisionControl = new FormControl(null, [Validators.minLength(2), Validators.required]);
+  nombreControl = new FormControl<string | null>(null, [Validators.minLength(2), Validators.required]);
+  apellidoControl = new FormControl<string | null>(null, [Validators.minLength(2), Validators.required]);
+  emailControl = new FormControl<string | null>(null, [Validators.minLength(2), Validators.required]);
+  comisionControl = new FormControl<number | null>(null, [Validators.minLength(2), Validators.required]);
 
   usuarioForm = new FormGroup({
     nombre: this.nombreControl,
@@ -22,7 +23,19 @@ export class UsuarioDialogoFormularioComponent {
 
   });
 
-  constructor(private dialogRef: MatDialogRef<UsuarioDialogoFormularioComponent>){}
+  constructor(
+    private dialogRef: MatDialogRef<UsuarioDialogoFormularioComponent>,
+    @Inject(MAT_DIALOG_DATA) private data?: usuario,
+    ){
+      if(this.data) {
+        this.nombreControl.setValue(this.data.nombre);
+        this.apellidoControl.setValue(this.data.apellido);
+        this.emailControl.setValue(this.data.email);
+        this.comisionControl.setValue(this.data.comision);
+      }
+
+
+    }
 
   onSubmit(): void {
       if (this.usuarioForm.invalid) {
