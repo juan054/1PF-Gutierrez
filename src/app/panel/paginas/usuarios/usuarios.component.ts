@@ -60,7 +60,7 @@ export class UsuariosComponent {
  };
  
  onDeleteUsuario(usuarioDelete: any): void{
-  if (confirm('¿esta seguro de eliminar a ${usuarioDelete.nombreCompleto}?' )) {
+  if (confirm(`¿esta seguro de eliminar a ${usuarioDelete.nombre}?` )) {
     this.usuario = this.usuario.filter((usuario) => usuario.id !== usuarioDelete.id )
   }
   

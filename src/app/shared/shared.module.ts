@@ -8,12 +8,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
+import { ModificacionesModalDirective } from './directivas/modificaciones-modal.directive';
 
 
 
 @NgModule({
   declarations: [
-    NombreCompletoPipe
+    NombreCompletoPipe,
+    ModificacionesModalDirective
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
     MatInputModule,
     MatDialogModule,
     MatTableModule,
-    NombreCompletoPipe 
+    NombreCompletoPipe,
+    ModificacionesModalDirective
        
   ]
 })
