@@ -3,12 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UsuarioDialogoFormularioComponent } from './componentes/usuario-dialogo-formulario/usuario-dialogo-formulario.component';
 import { usuario } from './componentes/modelos/modelos';
+import { UsuariosService } from '../usuarios.service';
+import { Observable } from 'rxjs';
 
 
 
-const ELEMENT_DATA: usuario [] = [
-  {id:1, nombre:'juan', apellido:'gutierrez',email:'juang@ejemplo.com', comision:654321 }
-];
+
 
 @Component({
   selector: 'app-usuarios',
@@ -17,43 +17,35 @@ const ELEMENT_DATA: usuario [] = [
 })
 export class UsuariosComponent {
 
+public usuarios:Observable<usuario[]>;
 
+constructor(
+  private matdialog: MatDialog,
+  private usuariosService: UsuariosService
+ ){ 
 
+  this.usuarios = this.usuariosService.getUsuarios()
+  this.usuariosService.cargandoUsuarios()
+  //this.usuariosService.getUsuarios();
+};
 
-  public usuario: usuario[] = ELEMENT_DATA;
-
- constructor(
-  private matdialog: MatDialog
- ){};
-
-
- 
-
- crearUsuario(): void {
+  crearUsuario(): void {
   this.matdialog
   .open(UsuarioDialogoFormularioComponent)
   .afterClosed()
   .subscribe({
     next: (v) => {
       if (v) {
-  this.usuario = [...this.usuario,{
- 
-    id: this.usuario.length + 1,
-    nombre: v.nombre,
-    apellido: v.apellido,
-    email:v.email,
-    comision:v.comision 
   
-
-  }]
-
-       
-
-      }
-      else{
-        console.log('creacion de ususario cancelada'
-        )
-      }
+      this.usuariosService.crearUsuario({
+      id: new Date().getTime(),
+      nombre: v.nombre,
+      apellido: v.apellido,
+      email:v.email,
+      comision:v.comision 
+          });
+        }
+     
       
     }
   })
@@ -61,16 +53,9 @@ export class UsuariosComponent {
  
  onDeleteUsuario(usuarioDelete: any): void{
   if (confirm(`¿esta seguro de eliminar a ${usuarioDelete.nombre}?` )) {
-    this.usuario = this.usuario.filter((usuario) => usuario.id !== usuarioDelete.id )
+   // this.usuarios = this.usuarios.filter((usuarios) => usuarios.id !== usuarioDelete.id )
   }
-  
- 
-}
- ;
-
-
-
-
+  };
  onEditUsuario(usuarioEditar: any): void{
   this.matdialog
   .open(UsuarioDialogoFormularioComponent, {
@@ -81,24 +66,16 @@ export class UsuariosComponent {
     next: (data) => {
      console.log(data);
      if (data){
-      this.usuario = this.usuario.map((usuario) => {
-
-        return usuario.id === usuarioEditar.id 
-        ? {...usuario, ...data}
-        : usuario
-      })
+      //this.usuarios = this.usuarios.map((usuarios) => {
+//
+      //  return usuarios.id === usuarioEditar.id 
+      //  ? {...usuarios, ...data}
+      //  : usuarios
+      //})
      }
-      
-     
-
-
-
-    }
+  }
   })
  }
- 
-
-
  displayedColumns: string[] = ['id','nombreCompleto', 'email', 'comision','editarEliminar'];
  dataSource: usuario[] = [];
 

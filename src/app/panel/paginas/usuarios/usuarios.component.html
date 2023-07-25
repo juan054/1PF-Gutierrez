@@ -3,7 +3,7 @@
 <hr>
 
 <table mat-table   
-[dataSource]="usuario" 
+[dataSource]="(usuarios | async ) || []" 
 (deleteUsuario)="onDeleteUsuario($event)"
 (editarUsuario)="onEditUsuario($event)"
 class="mat-elevation-z8" >
