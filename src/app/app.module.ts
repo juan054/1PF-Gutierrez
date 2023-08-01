@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PanelModule } from './panel/panel.module';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -23,7 +24,8 @@ import { AutenticacionModule } from './autenticacion/autenticacion.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     PanelModule,
-    AutenticacionModule
+    AutenticacionModule,
+    HttpClientModule
     
     
 

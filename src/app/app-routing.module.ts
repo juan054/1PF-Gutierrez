@@ -4,6 +4,8 @@ import { PanelComponent } from './panel/panel.component';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
 import { UsuariosComponent } from './panel/paginas/usuarios/usuarios.component';
 import { CursosComponent } from './panel/paginas/cursos/cursos.component';
+import { IniciarSesionComponent } from './autenticacion/iniciar-sesion/iniciar-sesion.component';
+import { RegistrarseComponent } from './autenticacion/registrarse/registrarse.component';
 
 const routes: Routes = [
  { path: 'panel',
@@ -17,18 +19,33 @@ const routes: Routes = [
     path:'cursos',
     component:CursosComponent
   },
+  {
+    path:'**',
+    redirectTo:'/panel'
+  }
   
    ] 
 },
 //hermanos
 {
   path:'autenticacion',
-  component:AutenticacionComponent
+  component:AutenticacionComponent,
+  children:[
+    {
+      path:'iniciar-sesion',
+      component:IniciarSesionComponent
+    },
+    {
+      path:'registarse',
+      component:RegistrarseComponent
+    },
+    {
+      path:'**',
+      redirectTo:'/autenticacion'
+    }
+  ]
 },
-{
-  path:'**',
-  redirectTo:'/autenticacion'
-}
+
 ];
 
 @NgModule({
