@@ -38,7 +38,7 @@ crearUsuario(): void {
       if (v) {
   
       this.usuariosService.crearUsuario({
-      id: new Date().getTime(),
+      
       nombre: v.nombre,
       apellido: v.apellido,
       email:v.email,
@@ -51,6 +51,7 @@ crearUsuario(): void {
  
 onDeleteUsuario(usuarioDelete: any): void{
   if (confirm(`¿esta seguro de eliminar a ${usuarioDelete.nombre}?` )) {
+    this.usuariosService.eliminarUsuarioId(usuarioDelete.id)
    }
   };
 onEditUsuario(usuarioEditar: any): void{
@@ -61,8 +62,8 @@ onEditUsuario(usuarioEditar: any): void{
   .afterClosed()
   .subscribe({
     next: (data) => {
-     console.log(data);
-     if (data){
+      if (data){
+        this.usuariosService.editarUsuarioId(usuarioEditar.id, data)
     }
   }
   })

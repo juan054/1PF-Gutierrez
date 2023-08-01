@@ -6,8 +6,10 @@
     <button  mat-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Alumnos</button>
-        <button mat-menu-item>Cursos</button>
+        <mat-nav-list>
+          <a routerLink="usuarios" mat-list-item>usuarios</a>
+          <a routerLink="cursos" mat-list-item>cursos</a>
+        </mat-nav-list>
       </mat-menu>
     </button>
     
@@ -20,9 +22,9 @@
       <mat-icon>share</mat-icon>
     </button>
   </mat-toolbar>
-<hr>
 
-<app-usuarios></app-usuarios>
+
+<router-outlet></router-outlet>
     
 
 

@@ -9,6 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
 import { ModificacionesModalDirective } from './directivas/modificaciones-modal.directive';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -30,7 +32,9 @@ import { ModificacionesModalDirective } from './directivas/modificaciones-modal.
     MatDialogModule,
     MatTableModule,
     NombreCompletoPipe,
-    ModificacionesModalDirective
+    ModificacionesModalDirective,
+    MatListModule,
+    MatCardModule
        
   ]
 })

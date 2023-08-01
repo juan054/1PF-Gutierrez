@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { usuario } from './usuarios/componentes/modelos/modelos';
-import { BehaviorSubject, Observable, Subject, delay, of } from 'rxjs';
+import { creandoDataUsuario, editandoDataUsuario, usuario } from './usuarios/componentes/modelos/modelos';
+import { BehaviorSubject, Observable, Subject, delay, of, take } from 'rxjs';
 
 
 const usuario_BD: Observable<usuario[]> = of ([
@@ -27,15 +27,44 @@ export class UsuariosService {
     })
 }
 
-  crearUsuario (usuario: usuario) : void{
-  usuario_BD.subscribe({
+  crearUsuario (usuario: creandoDataUsuario) : void{
+  this.usuario$.pipe(take(1)).subscribe({
     next:(arrayActual) =>{
-      this.usuario$.next([...arrayActual, usuario])
+      this.usuario$.next([...arrayActual,{ ...usuario, id: arrayActual.length +1}])
     }
   })
+  };
+
+  editarUsuarioId(id: Number , usuarioEditado: editandoDataUsuario): void{
+    this.usuario$.pipe(take(1)).subscribe({
+      next: (arrayActual) => {
+        this.usuario$.next(
+          arrayActual.map((u) => u.id === id ?{...u, ...usuarioEditado}: u )
+        )
+      }
+    })
   }
 
-  getUsuarios() :Subject<usuario[]>{
-    return this.usuario$;
+  eliminarUsuarioId(id: Number):void{
+    this.usuario$.pipe(take(1)).subscribe({
+      next: (arrayActual) => this.usuario$.next(arrayActual.filter((u) => u.id !== id)),
+    })
+
   }
+
+
+  getUsuarios() :Subject<usuario[]>{
+  return this.usuario$;
+  }
+
+
 }
+
+
+
+
+
+
+
+
+

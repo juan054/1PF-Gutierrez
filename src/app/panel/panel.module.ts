@@ -6,6 +6,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
 import { UsuariosModule } from './paginas/usuarios/usuarios.module';
+import { CursosModule } from './paginas/cursos/cursos.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -22,7 +24,9 @@ import { UsuariosModule } from './paginas/usuarios/usuarios.module';
     SharedModule,
     MatMenuModule,
     MatTableModule,
-    UsuariosModule
+    UsuariosModule,
+    CursosModule,
+    AppRoutingModule
   ],
   exports: [
     PanelComponent,

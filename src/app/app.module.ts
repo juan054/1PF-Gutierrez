@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PanelModule } from './panel/panel.module';
+import { AutenticacionModule } from './autenticacion/autenticacion.module';
 
 
 
@@ -22,6 +23,7 @@ import { PanelModule } from './panel/panel.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     PanelModule,
+    AutenticacionModule
     
     
 
