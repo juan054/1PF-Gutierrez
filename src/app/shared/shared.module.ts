@@ -11,6 +11,8 @@ import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
 import { ModificacionesModalDirective } from './directivas/modificaciones-modal.directive';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -34,7 +36,9 @@ import { MatCardModule } from '@angular/material/card';
     NombreCompletoPipe,
     ModificacionesModalDirective,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule,
+    AppRoutingModule
        
   ]
 })

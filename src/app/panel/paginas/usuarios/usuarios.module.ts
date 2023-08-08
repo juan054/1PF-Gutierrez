@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './usuarios.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UsuarioDialogoFormularioComponent } from './componentes/usuario-dialogo-formulario/usuario-dialogo-formulario.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { UsuarioDialogoFormularioComponent } from './componentes/usuario-dialogo
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   exports: [UsuariosComponent]
 })

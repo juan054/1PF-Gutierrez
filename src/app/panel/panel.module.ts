@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UsuariosModule } from './paginas/usuarios/usuarios.module';
 import { CursosModule } from './paginas/cursos/cursos.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { HomeModule } from './home/home.module';
 
 
 
@@ -26,7 +27,8 @@ import { AppRoutingModule } from '../app-routing.module';
     MatTableModule,
     UsuariosModule,
     CursosModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HomeModule
   ],
   exports: [
     PanelComponent,
