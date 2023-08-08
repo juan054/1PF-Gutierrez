@@ -1,0 +1,19 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "juan mariano",
+      "apellido": "gutierrez",
+      "email": "juang@ejemplo.com",
+      "comision": 654321
+    },
+    {
+      "nombre": "carlos",
+      "apellido": "gutierrez",
+      "email": "molucero87@gmail.com",
+      "comision": "3556",
+      "id": 2
+    }
+  ],
+  "cursos": []
+}

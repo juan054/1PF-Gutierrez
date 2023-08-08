@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { creandoDataUsuario, editandoDataUsuario, usuario } from './usuarios/componentes/modelos/modelos';
-import { BehaviorSubject, Observable, Subject, delay, of, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, delay, mapTo, mergeMap, of, take } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'jquery';
 
 
 const usuario_BD: Observable<usuario[]> = of ([
@@ -18,22 +20,38 @@ export class UsuariosService {
   private usuario$ = new BehaviorSubject <usuario[]>([]);
 
 
-  constructor() { }
+  constructor(private httpClient : HttpClient) { }
 
   cargandoUsuarios():void{
-    usuario_BD.subscribe({
-      next:(usuariosBaseDatos)=> this.usuario$.next(usuariosBaseDatos)
-
+    this.httpClient.get<usuario[]>('http://localhost:3000/usuarios').subscribe({
+      next:(response) => {
+        this.usuario$.next(response);
+      }
     })
+
+ 
 }
 
   crearUsuario (usuario: creandoDataUsuario) : void{
-  this.usuario$.pipe(take(1)).subscribe({
-    next:(arrayActual) =>{
-      this.usuario$.next([...arrayActual,{ ...usuario, id: arrayActual.length +1}])
-    }
-  })
-  };
+    this.httpClient.post<usuario>('http://localhost:3000/usuarios', usuario)
+    .pipe(
+      mergeMap((usuarioCreado)=>this.usuario$.pipe(take(1), map((arrayActual) =>[...arrayActual, usuarioCreado])) )
+    )
+    .subscribe({
+      next:(usuarioCreado) =>{
+        console.log(usuarioCreado);
+      }
+    })
+  
+  
+  
+  
+  
+  }
+    
+    
+
+
 
   editarUsuarioId(id: Number , usuarioEditado: editandoDataUsuario): void{
     this.usuario$.pipe(take(1)).subscribe({
