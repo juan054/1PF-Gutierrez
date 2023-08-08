@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { creandoDataUsuario, editandoDataUsuario, usuario } from './usuarios/componentes/modelos/modelos';
-import { BehaviorSubject, Observable, Subject, delay, mapTo, mergeMap, of, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, delay, map, mergeMap, of, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'jquery';
+
 
 
 const usuario_BD: Observable<usuario[]> = of ([
@@ -32,43 +32,35 @@ export class UsuariosService {
  
 }
 
-  crearUsuario (usuario: creandoDataUsuario) : void{
-    this.httpClient.post<usuario>('http://localhost:3000/usuarios', usuario)
-    .pipe(
-      mergeMap((usuarioCreado)=>this.usuario$.pipe(take(1), map((arrayActual) =>[...arrayActual, usuarioCreado])) )
-    )
-    .subscribe({
-      next:(usuarioCreado) =>{
-        console.log(usuarioCreado);
-      }
-    })
-  
-  
-  
-  
-  
+  crearUsuario (usuarioPayload: creandoDataUsuario) : void{
+   this.httpClient.post<usuario>('http://localhost:3000/usuarios', usuarioPayload)
+   .pipe(
+     mergeMap((usuarioCreado)=>this.usuario$.pipe(take(1), map((arrayActual) =>[...arrayActual, usuarioCreado])) )
+ )
+   .subscribe({
+     next:(usuarioCreado) =>{
+       console.log(usuarioCreado);
+       this.usuario$.next(usuarioCreado)
+     }})
+
+
   }
     
-    
+   editarUsuarioId(id: Number , usuarioEditado: editandoDataUsuario): void{
 
 
-
-  editarUsuarioId(id: Number , usuarioEditado: editandoDataUsuario): void{
-    this.usuario$.pipe(take(1)).subscribe({
-      next: (arrayActual) => {
-        this.usuario$.next(
-          arrayActual.map((u) => u.id === id ?{...u, ...usuarioEditado}: u )
-        )
-      }
-    })
-  }
+    this.httpClient.put('http://localhost:3000/usuarios/'+ id, usuarioEditado )
+      .subscribe({
+        next:() => this.cargandoUsuarios(),
+      })
+}
 
   eliminarUsuarioId(id: Number):void{
-    this.usuario$.pipe(take(1)).subscribe({
-      next: (arrayActual) => this.usuario$.next(arrayActual.filter((u) => u.id !== id)),
+    this.httpClient.delete('http://localhost:3000/usuarios/' + id )
+    .subscribe({
+      next:(arrayActualizado)=> this.cargandoUsuarios(),
     })
-
-  }
+}
 
 
   getUsuarios() :Subject<usuario[]>{
