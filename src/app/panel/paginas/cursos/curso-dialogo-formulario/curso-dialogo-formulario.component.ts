@@ -12,7 +12,7 @@ import { cursos } from '../modelos/modelosCursos';
 export class CursoDialogoFormularioComponent {
   nombreCursoControl = new FormControl<string | null>(null, [Validators.minLength(2), Validators.required]);
   teoricoPracticoControl = new FormControl<string | null>(null, [Validators.minLength(2), Validators.required]);
-  profesorControl = new FormControl<string | null>(null, [Validators.email, Validators.required]);
+  profesorControl = new FormControl<string | null>(null, [ Validators.required]);
   comisionControl = new FormControl<number | null>(null, [Validators.minLength(2), Validators.required]);
 
   cursosForm = new FormGroup({

@@ -5,6 +5,7 @@ import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.componen
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { AutenticacionRoutingModule } from './autenticacion-routing.module';
 
 
 
@@ -18,8 +19,10 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    AutenticacionRoutingModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    
   ]
 })
 export class AutenticacionModule { }

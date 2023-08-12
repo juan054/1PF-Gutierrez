@@ -18,3 +18,11 @@ export interface editandoDataUsuario {
     email?:string;
     comision?:number;
 }
+export interface usuarioLogin{
+    id: number;
+    nombre:string;
+    apellido:string;
+    email:string;
+    comision:number;
+    pasword:string;
+}

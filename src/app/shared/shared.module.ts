@@ -12,7 +12,11 @@ import { ModificacionesModalDirective } from './directivas/modificaciones-modal.
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from '../app-routing.module';
+import {  MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+
 
 
 
@@ -33,13 +37,17 @@ import { AppRoutingModule } from '../app-routing.module';
     MatInputModule,
     MatDialogModule,
     MatTableModule,
+    MatMenuModule,
     NombreCompletoPipe,
     ModificacionesModalDirective,
     MatListModule,
     MatCardModule,
     RouterModule,
-    AppRoutingModule
-       
-  ]
+    MatToolbarModule,
+    MatSidenavModule ,
+    
+    
+  ],
+  providers:[]
 })
 export class SharedModule { }

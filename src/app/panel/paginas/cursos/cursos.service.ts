@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { creandoDataCursos, cursos, editandoDataCursos } from './modelos/modelosCursos';
-import { BehaviorSubject, Observable, Subject, delay, of, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, delay, map, mergeMap, of, take } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { NotificacionesService } from 'src/app/core/servicios/notificaciones.service';
 
 
-const cursos_BD: Observable<cursos[]> = of ([
-  {id:1, nombreCurso:'matematica', teoricoPractico:'teorico',profesor:'juan gutierrez', comision:654321 },
-  {id:2, nombreCurso:'matematica', teoricoPractico:'teorico',profesor:'juan gutierrez', comision:654321 },
-]).pipe(delay(500));
+
 
 
 @Injectable({
@@ -14,39 +13,44 @@ const cursos_BD: Observable<cursos[]> = of ([
 })
 export class CursosService {
   private cursos$ = new BehaviorSubject <cursos[]>([]);
-  constructor() { }
+  constructor(private httpClient : HttpClient, private notificaciones: NotificacionesService) { }
 
 
   cargandoCursos():void{
-    cursos_BD.subscribe({
-      next:(cursosBaseDatos)=> this.cursos$.next(cursosBaseDatos)
-
+    this.httpClient.get<cursos[]>('http://localhost:3000/cursos').subscribe({
+      next:(response) => {
+        this.cursos$.next(response);
+      }
     })
+
 }
 
   crearCursos (cursos: creandoDataCursos) : void{
-  this.cursos$.pipe(take(1)).subscribe({
-    next:(arrayActual) =>{
-      this.cursos$.next([...arrayActual,{ ...cursos, id: arrayActual.length +1}])
-    }
-  })
+    this.httpClient.post<cursos>('http://localhost:3000/cursos', cursos)
+    .pipe(
+      mergeMap((cursoCreado)=>this.cursos$.pipe(take(1), map((arrayActual) =>[...arrayActual, cursoCreado])) )
+  )
+    .subscribe({
+      next:(cursoCreado) =>{
+        this.cursos$.next(cursoCreado)
+      }}),
+      this.notificaciones.showSuccess('Curso creado')
+ 
   };
 
   editarCursosId(id: Number , cursosEditado:editandoDataCursos): void{
-    this.cursos$.pipe(take(1)).subscribe({
-      next: (arrayActual) => {
-        this.cursos$.next(
-          arrayActual.map((u) => u.id === id ?{...u, ...cursosEditado}: u )
-        )
-      }
+    this.httpClient.put('http://localhost:3000/cursos/'+ id, cursosEditado )
+    .subscribe({
+      next:() => this.cargandoCursos(),
     })
   }
 
   eliminarCursosId(id: Number):void{
-    this.cursos$.pipe(take(1)).subscribe({
-      next: (arrayActual) => this.cursos$.next(arrayActual.filter((c) => c.id !== id)),
-    })
-
+    this.httpClient.delete('http://localhost:3000/cursos/' + id )
+    .subscribe({
+      next:(arrayActualizado)=> this.cargandoCursos(),
+    }),
+    this.notificaciones.showInfo('Curso eliminado');
   }
 
 

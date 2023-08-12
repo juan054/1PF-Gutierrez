@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { creandoDataUsuario, editandoDataUsuario, usuario } from './usuarios/componentes/modelos/modelos';
 import { BehaviorSubject, Observable, Subject, delay, map, mergeMap, of, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { NotificacionesService } from 'src/app/core/servicios/notificaciones.service';
 
 
 
-const usuario_BD: Observable<usuario[]> = of ([
-  {id:1, nombre:'juan', apellido:'gutierrez',email:'juang@ejemplo.com', comision:654321 },
-  {id:2, nombre:'giuliana', apellido:'lucero',email:'giulcero@ejemplo.com', comision:195821 },
-]).pipe(delay(500));
+
 
 
 
@@ -20,7 +18,7 @@ export class UsuariosService {
   private usuario$ = new BehaviorSubject <usuario[]>([]);
 
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient, private notificaciones : NotificacionesService) { }
 
   cargandoUsuarios():void{
     this.httpClient.get<usuario[]>('http://localhost:3000/usuarios').subscribe({
@@ -41,7 +39,8 @@ export class UsuariosService {
      next:(usuarioCreado) =>{
        console.log(usuarioCreado);
        this.usuario$.next(usuarioCreado)
-     }})
+     }}),
+     this.notificaciones.showSuccess('Usuario creado')
 
 
   }
@@ -59,7 +58,8 @@ export class UsuariosService {
     this.httpClient.delete('http://localhost:3000/usuarios/' + id )
     .subscribe({
       next:(arrayActualizado)=> this.cargandoUsuarios(),
-    })
+    }),
+    this.notificaciones.showInfo('Usuario eliminado');
 }
 
 

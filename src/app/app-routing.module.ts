@@ -2,33 +2,27 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PanelComponent } from './panel/panel.component';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
-import { UsuariosComponent } from './panel/paginas/usuarios/usuarios.component';
-import { CursosComponent } from './panel/paginas/cursos/cursos.component';
-import { IniciarSesionComponent } from './autenticacion/iniciar-sesion/iniciar-sesion.component';
-import { RegistrarseComponent } from './autenticacion/registrarse/registrarse.component';
-import { HomeComponent } from './panel/home/home.component';
-import { AppComponent } from './app.component';
+import { AutenticacionGuard } from './core/guards/autenticacion.guard';
+
 
 const routes: Routes = [
-    {path:'',
-  component:PanelComponent,
-children:[
-  {path:'usuarios',component:UsuariosComponent},
-  {path:'cursos',component:CursosComponent},
-  {path:'home',component:HomeComponent},
-
-]},
-{path:'**', redirectTo:'panel'},
-{path:'autenticacion',component:AutenticacionComponent,
-children:[
-  {path:'iniciar-sesion',component:IniciarSesionComponent},
-  {path:'registrarse',component:RegistrarseComponent},
+  {
+    path: 'panel',
+    canActivate:[AutenticacionGuard],
+    component:PanelComponent,
+    loadChildren: () => import('./panel/panel.module').then((m) => m.PanelModule)
+  },
   
-]
-},
-//{path:'**',redirectTo:'autenticacion'}
+  {
+    path: 'autenticacion',
+    component: AutenticacionComponent,
+    loadChildren: () => import('./autenticacion/autenticacion.module').then((m) => m.AutenticacionModule)
+  },
+  {path:'**', redirectTo:'/autenticacion/iniciar-sesion'},
+  
+];
 
-]
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

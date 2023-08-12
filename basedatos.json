@@ -6,14 +6,15 @@
       "email": "pacheco@mail.com",
       "comision": "987654321",
       "id": 4
-    },
-    {
-      "nombre": "giuliana",
-      "apellido": "mariano",
-      "email": "carli@gmial.com",
-      "comision": "987654321",
-      "id": 5
     }
   ],
-  "cursos": []
+  "cursos": [
+    {
+      "nombreCurso": "informatica",
+      "teoricoPractico": "teorico",
+      "profesor": "armendia ",
+      "comision": "987654321",
+      "id": 1
+    }
+  ]
 }

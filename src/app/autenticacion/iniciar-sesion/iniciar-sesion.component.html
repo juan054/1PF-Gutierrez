@@ -1,1 +1,36 @@
-<p>iniciar-sesion works!</p>
+
+<div class="center-container">
+    <mat-card  class="example-card " class="logeo">
+      <mat-card-header>
+        <mat-card-title>Ingreso al sistema</mat-card-title>
+        <mat-card-subtitle>inicie sesion o registrese</mat-card-subtitle>
+      </mat-card-header>
+     
+      
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Enter your email</mat-label>
+          <input matInput placeholder="pat@example.com" [formControl]="emailControl" required>
+          
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input matInput [formControl]="paswordControl"  >
+          <mat-error>Campo Invalido</mat-error>
+          
+        </mat-form-field>
+        <div>
+          <button mat-button color="accent"><a class="estilo" routerLink="registrarse" mat-list-item>Registrarse</a></button>
+          
+          <button (click)="iniciarSesion()" mat-button color="accent">iniciar sesion</button>
+        </div>
+        
+        
+  
+        
+      </div>
+    </mat-card>
+    
+  </div>  
+    <router-outlet></router-outlet>
+  
