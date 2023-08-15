@@ -15,6 +15,13 @@
       "profesor": "armendia ",
       "comision": "987654321",
       "id": 1
+    },
+    {
+      "nombreCurso": "informatica",
+      "teoricoPractico": "teorico",
+      "profesor": "armendia ",
+      "comision": "987654321",
+      "id": 2
     }
   ]
 }

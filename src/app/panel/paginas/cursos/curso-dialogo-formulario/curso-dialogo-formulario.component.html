@@ -5,7 +5,7 @@
     <div class="col-12 field">
         <mat-form-field class="w-full w-100 " appearance="fill">
             <mat-label>NombreCurso</mat-label>
-            <input formControlName="nombreCurso" matInput type="text" name="nombreCurso" />
+            <input matInput [formControl]="nombreCursoControl" matInput type="text" name="nombreCurso" />
             <mat-error *ngIf="nombreCursoControl.hasError('required')">Este campo es requerido</mat-error>
             <mat-error *ngIf="nombreCursoControl.hasError('minlength')">Ingresa minimamente {{nombreCursoControl.errors?.['minlength']?.requiredLength}} letras</mat-error>
         </mat-form-field>
@@ -13,7 +13,7 @@
    <div class="col-6 field">
       <mat-form-field class="w-full w-100" appearance="fill">
         <mat-label>teoricoPractico </mat-label>
-        <input formControlName="teoricoPractico" matInput type="text" name="teoricoPractico" />
+        <input matInput [formControl]="teoricoPracticoControl" matInput type="text" name="teoricoPractico" />
         <mat-error *ngIf="teoricoPracticoControl.hasError('required')">Este campo es requerido</mat-error>
             <mat-error *ngIf="teoricoPracticoControl.hasError('minlength')">Ingresa minimamente {{teoricoPracticoControl.errors?.['minlength']?.requiredLength}} letras</mat-error>
     </mat-form-field>
@@ -23,7 +23,7 @@
     <div class="field col-6">
       <mat-form-field class="w-full w-100" appearance="fill">
         <mat-label>profesor</mat-label>
-        <input [formControl]="profesorControl" matInput type="text" name="profesor" />
+        <input matInput [formControl]="profesorControl" matInput type="text" name="profesor" />
         <mat-error *ngIf="profesorControl.hasError('required')">Este campo es requerido</mat-error>
         <mat-error *ngIf="profesorControl.hasError('minlength')">Ingresa minimamente {{profesorControl.errors?.['minlength']?.requiredLength}} letras</mat-error>
         </mat-form-field>
@@ -33,7 +33,7 @@
     <div class="field col-12">
       <mat-form-field class="w-full w-100" appearance="fill">
         <mat-label>Comision</mat-label>
-        <input [formControl]="comisionControl" matInput type="text" name="comision" />
+        <input matInput [formControl]="comisionControl" matInput type="text" name="comision" />
         <mat-error *ngIf="comisionControl.hasError('required')">Este campo es requerido</mat-error>
         <mat-error *ngIf="comisionControl.hasError('minlength')">Ingresa minimamente {{comisionControl.errors?.['minlength']?.requiredLength}} letras</mat-error>
         </mat-form-field>
